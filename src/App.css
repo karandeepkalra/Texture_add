@@ -30,9 +30,10 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 50;
+  /* z-index: 50; */
   pointer-events: none;
   display: flex;
+  
   flex-direction: column;
 }
 
@@ -44,13 +45,15 @@ body {
   display: flex;
   align-items: center;
   padding: 15px;
-  background-color: rgba(255,255,255, 0.092);
+  background: linear-gradient(to right, #577A8B, #263D44);
   color: white;
   height: 60px;
 }
 .Logo{
   width: 170px;
-  margin-left:100px
+  margin-top:25px;
+  margin-left:100px;
+  opacity: 0.2;
 }
 .back-button {
   width: 36px;
@@ -91,22 +94,27 @@ body {
 
 .design-panel {
   position: absolute;
-  left: 80px; /* Move it more to the right */
+  left: 270px; /* Move it more to the right */
   top: 50%;
+  /* border:2px solid blue; */
   transform: translateY(-50%);
   display: flex;
   pointer-events: auto;
   z-index: 100;
 }
 .tool-sidebar {
-  width: 60px;
-  background-color: rgba(255, 255, 255, 0.092);
+  width: 100px;
+  height:530px;
+  background-color: rgba(255, 255, 255, 0.2);
+  
   border-radius: 70px 70px 80px 70px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 45px;
+  justify-content: space-evenly;
+  padding: 20px 0px;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
 }
 
 .tool-item {
@@ -116,15 +124,15 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 15px;
+  margin:7px 0;
   padding: 35px 35px;
   cursor: pointer;
-  background-color: #f0f2f5;
+  background-color:#D9D9D9;
 }
 
-.tool-item.active {
+/* .tool-item.active {
   background-color: #e2e8f0;
-}
+} */
 
 .tool-icon {
   width: 24px;
@@ -135,24 +143,48 @@ body {
   font-size: 40px;
   color: #4a5568;
 }
-
-.design-content {
-  width: 450px; /* Increased width */
-  height: 380px; /* Added explicit height */
-  background-color: rgba(255, 255, 255, 0.092); /* Slightly transparent white */
-  border-radius: 0 8px 8px 0;
-  padding: 15px;
-  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
-  margin-top:5%;
-  margin-left: 5%;
+.t1{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.design-content {
+  display: flex;
+  /* border:4px solid red; */
+  background-color: rgba(255, 255, 255, 0.2);
+  margin-left:20px;
+  padding:1px;
+  margin-top:19px;
+  flex-direction: column;
+  gap: 15px;
+  width:450px;
+  backdrop-filter: blur(4px);
+  overflow-y: visible;
+  overflow-x: hidden;
+  height: 500px;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+
+  /* max-height:none; */
+  border-radius:20px 20px 20px 20px;
+}
+.grid-wrapper {
+  max-height: none; /* Remove height limitation */
+  overflow-y: visible; /* Show all content */
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  margin-bottom: 10px;
+  padding-right: 0; /* Remove padding that was for scrollbar */
+}
 
 .design-tabs {
   display: flex;
+  flex-direction: row;
   border-bottom: 1px solid #e2e8f0;
   margin-bottom: 15px;
+  width:100%;
 }
 
 .tab {
@@ -161,10 +193,16 @@ body {
   color:white;
   font-weight: 500;
   position: relative;
+  flex:1;
+  text-align:center;;
 }
 
 .tab.active {
   color: black;
+}
+.pattern-section, .color-section {
+  display: block; /* Always visible */
+  margin-bottom: 0px;
 }
 
 .tab.active:after {
@@ -177,6 +215,8 @@ body {
   background-color: #4299e1;
 }
 
+
+
 .pattern-categories {
   display: flex;
   flex-wrap: wrap;
@@ -185,36 +225,42 @@ body {
 }
 
 .category {
-  padding: 6px 12px;
+  padding: 1px 4px;
   /* background-color: #f0f2f5; */
-  border-radius: 4px;
-  font-size: 14px;
+  border-radius: 10px;
+  
   cursor: pointer;
-  color: #070c14;
+  font-size: 19px;
+  color:#CFCFCF
 }
-
+#cat{
+  margin-left:1px;
+}
 .category.active {
-  background-color: #e2e8f0;
-  /* color: #2d3748; */
-  color:"black";
+  color:#f0f2f5;
   font-weight: 500;
 }
 
 .pattern-grid, .color-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 15px;
-  margin-top: 20px;
+  
+  grid-template-columns: repeat(5, 1fr); /* Force 5 columns */
+  gap: 19px;
+  width: 70%; /* Ensure full width */
+  padding-bottom: 8px; /* Prevent cutoff of last row */
 }
 
 .pattern-item, .color-item {
   aspect-ratio: 1;
   background-color: #f0f2f5;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   transition: transform 0.2s;
-  height: 55px;
+  height: 65px; /* Consistent height */
   border: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .pattern-item:hover, .color-item:hover {
@@ -228,12 +274,13 @@ body {
   border-radius: 5px;
   font-weight: 500;
   cursor: pointer;
+  font-size: 18px;
   transition: all 0.2s;
   width: 100px; /* Fixed width for buttons */
 }
 .action-buttons {
   position: absolute;
-  left: 380px;
+  left: 550px;
   top: calc(55% + 200px + 20px);
   transform: none;
   display: flex;
@@ -325,15 +372,11 @@ body {
   margin-bottom: 25px;
 }
 
-.section-title {
-  font-size: 18px;
-  color: #007bff;
-  margin-bottom: 15px;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: 600;
+.section-subtitle {
+  font-size: 24px;
+  color: white;
+  margin: 15px 0 10px;
+  font-weight: 500;
 }
 
 .control-item {
@@ -483,8 +526,8 @@ body {
 .canvas-container {
   flex: 1;
   height: 100%;
-  background: #4a7b8a; /* Teal/blue color from the image */
-  background: linear-gradient(to bottom, #5e8f9f, #375f6d); /* Gradient effect like in the image */
+ 
+  background: linear-gradient(to right, #577A8B, #263D44); /* Gradient effect like in the image */
   width: calc(100% - 300px); /* Default width when sidebar is open */
   transition: width 0.3s ease;
 
@@ -524,7 +567,24 @@ body {
     min-width: 40px;
   }
   
-  .design-content {
-    width: 280px;
-  }
+ 
+}
+
+
+.grid-wrapper::-webkit-scrollbar {
+  width: 5px;
+}
+
+.grid-wrapper::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 5px;
+}
+
+.grid-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+}
+
+.grid-wrapper::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
 }

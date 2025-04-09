@@ -14,7 +14,7 @@ function App() {
   const [decalScale, setDecalScale] = useState({ x: 0.1, y: 0.17 });
   const [aspectRatio, setAspectRatio] = useState(1); // Default to 1 (square)
   const [decalSide, setDecalSide] = useState("front");
-  const [activeSection, setActiveSection] = useState("pattern"); // For top tabs: pattern or color
+  const [activeSection, setActiveSection] = useState("pattern"); // For highlighting active tab
 
   // Handle file upload and calculate aspect ratio
   const handleFileUpload = (event) => {
@@ -85,83 +85,73 @@ function App() {
     <div className="app-container">
       {/* New UI Overlay */}
       <div className="configurator-overlay">
-        <div className="configurator-header">
-          <button className="back-button">
-          <span><img className="Logo" src="/Logo.png" alt="logo" /></span>
-          </button>
-        </div>
+        {/* <div className="configurator-header"> */}
+          
+            <span><img className="Logo" src="/Logo.png" alt="logo" /></span>
+
+        {/* </div> */}
 
         <div className="design-panel">
           <div className="tool-sidebar">
             <div className="tool-item active">
-              <div className="tool-icon">
-              <span><i class="fas fa-palette"></i></span>
+              <div className="tool-icon" id="abc">
+                <span><img className="t1" src="/Paint.png" alt="Paint" /></span>
               </div>
             </div>
             <div className="tool-item">
               <div className="tool-icon">
-              <span><i class="fa-solid fa-fill-drip"></i></span> 
+                <span><img className="t1" src="/Diagonal.png" alt="Diagonal" /></span>
               </div>
             </div>
             <div className="tool-item">
               <div className="tool-icon">
-              <span><i class="fas fa-shapes"></i></span> 
+                <span><img className="t1"  src="/Color.png" alt="Color" /></span>
               </div>
             </div>
             <div className="tool-item">
               <div className="tool-icon">
-              <span><i class="fa-solid fa-image"></i></span>
+                <span><img className="t1" src="/Image.png" alt="Image" /></span>
               </div>
             </div>
             <div className="tool-item">
               <div className="tool-icon">
-              <span><i class="fa-solid fa-t"></i></span> 
+                <span><img className="t1"  src="/Text.png" alt="Text" /></span>
               </div>
             </div>
           </div>
 
           <div className="design-content">
-            <div className="design-tabs">
-              <div 
-                className={`tab ${activeSection === "pattern" ? "active" : ""}`}
-                onClick={() => setActiveSection("pattern")}
-              >
-                Pattern
+            
+           
+            <div className="pattern-section">
+            <h1 className="section-subtitle">Pattern</h1>
+              <div className="pattern-categories">
+                <span className="category active">Collar</span>
+                <span className="category" id="cat">Placket</span>
+                <span className="category" id="cat">Chest Pocket</span>
+                <span className="category" id="cat">Cuff</span>
               </div>
-              <div 
-                className={`tab ${activeSection === "color" ? "active" : ""}`}
-                onClick={() => setActiveSection("color")}
-              >
-                Color
+              
+              <div className="grid-wrapper">
+                <div className="pattern-grid">
+                  {[...Array(10)].map((_, i) => (
+                    <div key={i} className="pattern-item" style={{ backgroundColor: `#${Math.floor(Math.random()*16777215).toString(16)}cc` }}></div>
+                  ))}
+                </div>
               </div>
             </div>
 
-            {activeSection === "pattern" && (
-              <div className="pattern-section">
-                <div className="pattern-categories">
-                  <span className="category active">Collar</span>
-                  <span className="category">Placket</span>
-                  <span className="category">Chest Pocket</span>
-                  <span className="category">Cuff</span>
-                </div>
-                
-                <div className="pattern-grid">
-                  {[...Array(10)].map((_, i) => (
-                    <div key={i} className="pattern-item"></div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {activeSection === "color" && (
-              <div className="color-section">
+            {/* Color Section - Always Visible */}
+            <div className="color-section">
+              <h1 className="section-subtitle">Colors</h1>
+              <div className="grid-wrapper">
                 <div className="color-grid">
                   {[...Array(10)].map((_, i) => (
-                    <div key={i} className="color-item"></div>
+                    <div key={i} className="color-item" style={{ backgroundColor: `#${Math.floor(Math.random()*16777215).toString(16)}cc` }}></div>
                   ))}
                 </div>
               </div>
-            )}
+            </div>
           </div>
         </div>
 
@@ -293,7 +283,7 @@ function App() {
             </div>
 
             <div className="control-item">
-              <label className="control-label"> Scale</label>
+              <label className="control-label">Scale</label>
               <div className="range-group">
                 <input
                   type="range"

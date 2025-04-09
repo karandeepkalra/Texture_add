@@ -33,7 +33,7 @@ export const Experience = ({ userTexture, hoodieColor, decalPosition, decalRotat
       />
       {/* <Float rotationIntensity={0.3} floatIntensity={0.8} speed={1.2}> */}
         <Hoodie
-          position={[0.5, 0.4, 0.3]}
+          position={[1, 0.4, 0.3]}
           scale={3}
           decalProps={{ logoTexture: userTexture }}
           hoodieColor={hoodieColor}

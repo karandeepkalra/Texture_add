@@ -1,21 +1,21 @@
-
-
-
+import { useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Experience } from "./components/Experience";
-import { Suspense, useState } from "react";
+import { Suspense } from "react";
 import * as THREE from "three";
+import { Experience } from "./components/Experience";
 import "./App.css";
 
 function App() {
   const [userTexture, setUserTexture] = useState(null);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [hoodieColor, setHoodieColor] = useState("#4a4a4a");
-  const [decalPosition, setDecalPosition] = useState({ x: 0, y: 0, z: 0.1 });
-  const [decalRotation, setDecalRotation] = useState({ x: 0.04, y: 0.01, z: 0 });
+  const [decalPosition, setDecalPosition] = useState({ x: 0, y: -0.01, z: 0.1 });
+  const [decalRotation, setDecalRotation] = useState({ x: Math.PI, y: 0, z: 0 });
   const [decalScale, setDecalScale] = useState({ x: 0.1, y: 0.17 });
   const [aspectRatio, setAspectRatio] = useState(1); // Default to 1 (square)
-  const [decalSide,setDecalSide]=useState("front");
+  const [decalSide, setDecalSide] = useState("front");
+  const [activeSection, setActiveSection] = useState("pattern"); // For top tabs: pattern or color
+
   // Handle file upload and calculate aspect ratio
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
@@ -61,6 +61,7 @@ function App() {
   const togglePanel = () => {
     setIsPanelOpen(!isPanelOpen);
   };
+
   const handleRotationXYChange = (axis, value) => {
     const degrees = parseInt(value);
     const radians = degrees === 0 ? Math.PI : degrees === 360 ? 0 : Math.PI; // 0° = π, 360° = 0
@@ -82,7 +83,95 @@ function App() {
 
   return (
     <div className="app-container">
-      {/* Sidebar Panel */}
+      {/* New UI Overlay */}
+      <div className="configurator-overlay">
+        <div className="configurator-header">
+          <button className="back-button">
+            <span>Logo</span>
+          </button>
+        </div>
+
+        <div className="design-panel">
+          <div className="tool-sidebar">
+            <div className="tool-item active">
+              <div className="tool-icon">
+              <span><i class="fas fa-palette"></i></span>
+              </div>
+            </div>
+            <div className="tool-item">
+              <div className="tool-icon">
+              <span><i class="fa-solid fa-fill-drip"></i></span> 
+              </div>
+            </div>
+            <div className="tool-item">
+              <div className="tool-icon">
+              <span><i class="fas fa-shapes"></i></span> 
+              </div>
+            </div>
+            <div className="tool-item">
+              <div className="tool-icon">
+              <span><i class="fa-solid fa-image"></i></span>
+              </div>
+            </div>
+            <div className="tool-item">
+              <div className="tool-icon">
+              <span><i class="fa-solid fa-t"></i></span> 
+              </div>
+            </div>
+          </div>
+
+          <div className="design-content">
+            <div className="design-tabs">
+              <div 
+                className={`tab ${activeSection === "pattern" ? "active" : ""}`}
+                onClick={() => setActiveSection("pattern")}
+              >
+                Pattern
+              </div>
+              <div 
+                className={`tab ${activeSection === "color" ? "active" : ""}`}
+                onClick={() => setActiveSection("color")}
+              >
+                Color
+              </div>
+            </div>
+
+            {activeSection === "pattern" && (
+              <div className="pattern-section">
+                <div className="pattern-categories">
+                  <span className="category active">Collar</span>
+                  <span className="category">Placket</span>
+                  <span className="category">Chest Pocket</span>
+                  <span className="category">Cuff</span>
+                </div>
+                
+                <div className="pattern-grid">
+                  {[...Array(10)].map((_, i) => (
+                    <div key={i} className="pattern-item"></div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {activeSection === "color" && (
+              <div className="color-section">
+                <div className="color-grid">
+                  {[...Array(10)].map((_, i) => (
+                    <div key={i} className="color-item"></div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="action-buttons">
+          <button className="save-btn">Save</button>
+          <button className="cart-btn">Add To Cart</button>
+        </div>
+      </div>
+
+      {/* Original Sidebar Panel - Keep this intact */}
       <div className={`sidebar ${isPanelOpen ? "open" : ""}`}>
         <button className="toggle-btn" onClick={togglePanel}>
           {isPanelOpen ? "✖" : "☰"}
@@ -182,15 +271,16 @@ function App() {
             <div className="control-item">
               <label className="control-label">Rotation</label>
               <div className="range-group">
-                 <input
-                 type="range"
-                 min="0"
-                 max="360"
-                 step="360" // Snaps between 0 and 360 only
-                 value={decalRotation.x === Math.PI ? 0 : 360}
-                 onChange={(e) => handleRotationXYChange("x", e.target.value)}
-                 className="range-input"/>
-                 <span>X: {(decalRotation.x * 180 / Math.PI).toFixed(0)}°</span>
+                <input
+                  type="range"
+                  min="0"
+                  max="360"
+                  step="360" // Snaps between 0 and 360 only
+                  value={decalRotation.x === Math.PI ? 0 : 360}
+                  onChange={(e) => handleRotationXYChange("x", e.target.value)}
+                  className="range-input"
+                />
+                <span>X: {decalRotation.x.toFixed(0)}°</span>
               </div>
               <div className="range-group">
                 <input
@@ -221,36 +311,23 @@ function App() {
                 />
                 <span>X: {decalScale.x.toFixed(2)}</span>
               </div>
-              {/* <div className="range-group">
-                <input
-                  type="range"
-                  min={0.1 / aspectRatio}
-                  max={2 / aspectRatio}
-                  step={0.01 / aspectRatio}
-                  value={decalScale.y}
-                  onChange={(e) => handleScaleChange("y", e.target.value)}
-                />
-                <span>Y: {decalScale.y.toFixed(2)}</span>
-              </div> */}
             </div>
           </div>
 
-          {/* More Options */}
-          {/* More Options */}
-<div className="control-section">
-  <h3 className="section-title">Display Options</h3>
-  
-  {/* Toggle Side Button */}
-  <div className="control-item">
-    <button 
-      className="action-btn" 
-      onClick={() => setDecalSide(decalSide === "front" ? "both" : "front")}
-    >
-      {decalSide === "front" ? "Show on Both Sides" : "Show on Front Only"}
-    </button>
-  </div>
-</div>
-          
+          {/* Display Options */}
+          <div className="control-section">
+            <h3 className="section-title">Display Options</h3>
+            
+            {/* Toggle Side Button */}
+            <div className="control-item">
+              <button 
+                className="action-btn" 
+                onClick={() => setDecalSide(decalSide === "front" ? "both" : "front")}
+              >
+                {decalSide === "front" ? "Show on Both Sides" : "Show on Front Only"}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 

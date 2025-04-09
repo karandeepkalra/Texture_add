@@ -1,5 +1,4 @@
 
-
 import { ContactShadows, Float, Environment, OrbitControls } from "@react-three/drei";
 import { Hoodie } from "./HoddieModel";
 
@@ -24,7 +23,7 @@ export const Experience = ({ userTexture, hoodieColor, decalPosition, decalRotat
         shadow-mapSize={[1024, 1024]}
       />
       <OrbitControls
-        minPolarAngle={Math.PI / 6}
+        minPolarAngle={Math.PI / 8}
         maxPolarAngle={Math.PI / 1.5}
         enablePan={true}
         enableZoom={true}
@@ -34,8 +33,8 @@ export const Experience = ({ userTexture, hoodieColor, decalPosition, decalRotat
       />
       {/* <Float rotationIntensity={0.3} floatIntensity={0.8} speed={1.2}> */}
         <Hoodie
-          position={[0, 0, 0]}
-          scale={1}
+          position={[0.5, 0.4, 0.3]}
+          scale={3}
           decalProps={{ logoTexture: userTexture }}
           hoodieColor={hoodieColor}
           decalPosition={decalPosition}
@@ -53,7 +52,7 @@ export const Experience = ({ userTexture, hoodieColor, decalPosition, decalRotat
         resolution={2048}
         color="#333333"
       />
-      <Environment preset="studio" background blur={0.6} />
+      {/* <Environment preset="studio" background blur={0.6} /> */}
     </>
   );
 };

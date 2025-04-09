@@ -55,7 +55,7 @@ export function Hoodie({ position, scale = 1, decalProps = {}, hoodieColor, deca
   return (
     <group ref={modelRef} position={position} dispose={null}>
       {Object.entries(nodes).map(([name, node]) => {
-        if (node.isMesh) {
+       if (node.isMesh) {
           return (
             <mesh
               key={name}
@@ -80,6 +80,7 @@ export function Hoodie({ position, scale = 1, decalProps = {}, hoodieColor, deca
             polygonOffset
             polygonOffsetFactor={-10}
             transparent
+            
           >
             <meshStandardMaterial
               map={logoTexture}

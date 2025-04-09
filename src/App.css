@@ -1,3 +1,5 @@
+/* Keep all your existing CSS and add these new styles */
+
 /* Reset default styles */
 * {
   margin: 0;
@@ -7,7 +9,7 @@
 
 body {
   font-family: 'Arial', sans-serif;
-  background: #f0f2f5;
+  background: #435e85;
   color: #333;
 }
 
@@ -17,9 +19,253 @@ body {
   height: 100vh;
   display: flex;
   overflow: hidden;
+  position: relative;
+  background-color: #0056b3;
 }
 
-/* Sidebar */
+/* New UI Overlay Styles */
+.configurator-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 50;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.configurator-overlay > * {
+  pointer-events: auto;
+}
+
+.configurator-header {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background-color: rgba(40, 44, 52, 0.9);
+  color: white;
+  height: 60px;
+}
+
+.back-button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  margin-right: 15px;
+}
+
+.header-title {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.header-title h1 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.header-title p {
+  font-size: 14px;
+  margin: 0;
+  opacity: 0.7;
+}
+
+.header-title .subtitle {
+  font-size: 12px;
+  color: #7b8794;
+}
+
+.design-panel {
+  position: absolute;
+  left: 80px; /* Move it more to the right */
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  pointer-events: auto;
+  z-index: 100;
+}
+.tool-sidebar {
+  width: 60px;
+  background-color: rgba(255, 255, 255, 0.092);
+  border-radius: 70px 70px 80px 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 45px;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.tool-item {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+  padding: 35px 35px;
+  cursor: pointer;
+  background-color: #f0f2f5;
+}
+
+.tool-item.active {
+  background-color: #e2e8f0;
+}
+
+.tool-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  color: #4a5568;
+}
+
+.design-content {
+  width: 450px; /* Increased width */
+  height: 380px; /* Added explicit height */
+  background-color: rgba(255, 255, 255, 0.092); /* Slightly transparent white */
+  border-radius: 0 8px 8px 0;
+  padding: 15px;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  margin-top:5%;
+  margin-left: 5%;
+}
+
+
+.design-tabs {
+  display: flex;
+  border-bottom: 1px solid #e2e8f0;
+  margin-bottom: 15px;
+}
+
+.tab {
+  padding: 10px 15px;
+  cursor: pointer;
+  color:white;
+  font-weight: 500;
+  position: relative;
+}
+
+.tab.active {
+  color: black;
+}
+
+.tab.active:after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #4299e1;
+}
+
+.pattern-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.category {
+  padding: 6px 12px;
+  /* background-color: #f0f2f5; */
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #070c14;
+}
+
+.category.active {
+  background-color: #e2e8f0;
+  /* color: #2d3748; */
+  color:"black";
+  font-weight: 500;
+}
+
+.pattern-grid, .color-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.pattern-item, .color-item {
+  aspect-ratio: 1;
+  background-color: #f0f2f5;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  height: 55px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.pattern-item:hover, .color-item:hover {
+  transform: scale(1.05);
+}
+
+
+
+.save-btn, .cart-btn {
+  padding: 10px 25px;
+  border-radius: 5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100px; /* Fixed width for buttons */
+}
+.action-buttons {
+  position: absolute;
+  left: 380px;
+  top: calc(55% + 200px + 20px);
+  transform: none;
+  display: flex;
+  gap: 15px;
+}
+
+.save-btn {
+  padding: 12px 28px;
+  border-radius: 5px;
+  font-weight: 500;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.092);
+  color: white;
+  border: none;
+  width: 120px;
+  text-align: center;
+}
+
+.cart-btn {
+  padding: 12px 28px;
+  border-radius: 5px;
+  font-weight: 500;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.092);
+  color: white;
+  border: none;
+  width: 160px;
+  text-align: center;
+}
+
+.save-btn:hover, .cart-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Keep your original sidebar styles*/
 .sidebar {
   position: fixed;
   top: 0;
@@ -95,7 +341,8 @@ body {
   display: block;
   font-size: 14px;
   margin-bottom: 8px;
-  color: #555;
+  /* color: #555; */
+  color: #b03838;
   font-weight: 500;
 }
 
@@ -233,9 +480,11 @@ body {
 .canvas-container {
   flex: 1;
   height: 100%;
-  background: #ececec;
+  background: #4a7b8a; /* Teal/blue color from the image */
+  background: linear-gradient(to bottom, #5e8f9f, #375f6d); /* Gradient effect like in the image */
   width: calc(100% - 300px); /* Default width when sidebar is open */
   transition: width 0.3s ease;
+
 }
 
 .sidebar:not(.open) + .canvas-container {
@@ -270,5 +519,9 @@ body {
 
   .range-group span {
     min-width: 40px;
+  }
+  
+  .design-content {
+    width: 280px;
   }
 }

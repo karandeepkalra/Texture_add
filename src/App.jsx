@@ -87,7 +87,7 @@ function App() {
       <div className="configurator-overlay">
         <div className="configurator-header">
           <button className="back-button">
-            <span>Logo</span>
+          <span><img className="Logo" src="/Logo.png" alt="logo" /></span>
           </button>
         </div>
 
@@ -171,7 +171,6 @@ function App() {
         </div>
       </div>
 
-      {/* Original Sidebar Panel - Keep this intact */}
       <div className={`sidebar ${isPanelOpen ? "open" : ""}`}>
         <button className="toggle-btn" onClick={togglePanel}>
           {isPanelOpen ? "✖" : "☰"}
@@ -179,11 +178,9 @@ function App() {
         <div className="sidebar-content">
           <h2 className="sidebar-title">Hoodie Customizer</h2>
 
-          {/* Design Options */}
           <div className="control-section">
             <h3 className="section-title">Design Options</h3>
 
-            {/* File Upload */}
             <div className="control-item">
               <label htmlFor="file-upload" className="control-label">
                 Upload Logo
@@ -197,14 +194,12 @@ function App() {
               />
             </div>
 
-            {/* Reset Texture */}
             <div className="control-item">
               <button className="action-btn" onClick={handleResetTexture}>
                 Reset Logo
               </button>
             </div>
 
-            {/* Hoodie Color */}
             <div className="control-item">
               <label htmlFor="hoodie-color" className="control-label">
                 Hoodie Color
@@ -219,11 +214,11 @@ function App() {
             </div>
           </div>
 
-          {/* Logo Adjustments */}
+          
           <div className="control-section">
             <h3 className="section-title">Logo Adjustments</h3>
 
-            {/* Position */}
+           
             <div className="control-item">
               <label className="control-label">Position</label>
               <div className="range-group">
@@ -267,7 +262,7 @@ function App() {
               </div>
             </div>
 
-            {/* Rotation */}
+        
             <div className="control-item">
               <label className="control-label">Rotation</label>
               <div className="range-group">
@@ -275,7 +270,7 @@ function App() {
                   type="range"
                   min="0"
                   max="360"
-                  step="360" // Snaps between 0 and 360 only
+                  step="360" 
                   value={decalRotation.x === Math.PI ? 0 : 360}
                   onChange={(e) => handleRotationXYChange("x", e.target.value)}
                   className="range-input"
@@ -297,9 +292,8 @@ function App() {
               </div>
             </div>
 
-            {/* Scale */}
             <div className="control-item">
-              <label className="control-label">Scale (Aspect Ratio Locked)</label>
+              <label className="control-label"> Scale</label>
               <div className="range-group">
                 <input
                   type="range"
@@ -314,11 +308,9 @@ function App() {
             </div>
           </div>
 
-          {/* Display Options */}
           <div className="control-section">
             <h3 className="section-title">Display Options</h3>
-            
-            {/* Toggle Side Button */}
+         
             <div className="control-item">
               <button 
                 className="action-btn" 
@@ -331,7 +323,6 @@ function App() {
         </div>
       </div>
 
-      {/* 3D Canvas */}
       <div className="canvas-container">
         <Canvas
           shadows

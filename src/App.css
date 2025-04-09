@@ -44,11 +44,14 @@ body {
   display: flex;
   align-items: center;
   padding: 15px;
-  background-color: rgba(40, 44, 52, 0.9);
+  background-color: rgba(255,255,255, 0.092);
   color: white;
   height: 60px;
 }
-
+.Logo{
+  width: 170px;
+  margin-left:100px
+}
 .back-button {
   width: 36px;
   height: 36px;

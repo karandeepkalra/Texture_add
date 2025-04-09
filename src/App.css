@@ -267,7 +267,19 @@ body {
   transform: scale(1.05);
 }
 
+.color-item {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
 
+.color-item:hover {
+  transform: scale(1.1);
+}
+
+.color-item.selected {
+  box-shadow: 0 0 0 2px white, 0 0 0 4px #333;
+ 
+}
 
 .save-btn, .cart-btn {
   padding: 10px 25px;
